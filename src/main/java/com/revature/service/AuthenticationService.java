@@ -15,6 +15,11 @@ public class AuthenticationService {
         this.userDao = new UserDao(); //UserDao object
     }
 
+    // We create a second parameterized constructor in order to "inject" a mock UserDao object into the service object
+    public AuthenticationService(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
     public User login(String username, String password) throws SQLException, InvalidLoginException {
         User user = userDao.getUserByUsernameAndPassword(username, password);
         //user could be null or a User object
